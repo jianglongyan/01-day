@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选项卡</title>
+    <script  src="js/vue.js"></script>
+    <style>
+        .tab{
+            width: 500px;
+            height: 300px;
+            border:1px solid #000;
+        }
+        .tab header{
+            height: 35px;
+            border-bottom: 1px solid #000;
+            line-height: 35px;
+        }
+        .tab header .item{
+            display: inline-block;
+            padding: 0 20px;
+            border-right: 1px solid #000;
+
+        }
+        .tab header .item.active{
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="tab">
+            <header>
+                <div 
+                class="item" 
+                v-bind:class="{
+                    active:selectIndex===index
+                }"
+                v-for="(item,index) in tabs"
+                v-on:click="selectIndex=index"
+                >
+                    <!-- {{index}} -->
+                    {{item.title}}
+                    
+                </div>
+            </header>
+            <main>
+                <h1 
+                v-for="(item,index) in tabs"
+                v-if="selectIndex===index"
+                >
+                    {{item.content}}
+                   
+                </h1>
+            </main>
+        </div>
+    </div>
+</body>
+<script>
+     const vm=new Vue({
+         el:"#app",
+         data:{
+             tabs:[
+                 {
+                     title:"我的关注",
+                    content:"我的关注的内容部分"
+                 },
+                 {
+                     title:"小说",
+                     content:"小说内容部分"
+
+                 },
+                 {
+                     title:"推荐",
+                     content:"推荐内容部分"
+                },
+                 {
+                     title:"导航",
+                     content:"导航内容部分"
+                }
+             ],
+             selectIndex:0 //被选中的index
+         }
+     })
+</script>
+</html>

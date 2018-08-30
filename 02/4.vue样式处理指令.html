@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .box{
+            width: 300px;
+            height: 300px;
+            background: transparent;
+            transition: all 0.5s linear;
+        }
+        .active{
+            background-color: red;
+            width: 400px;
+            height: 400px;
+        }
+        .box2{
+            width: 1000px;
+            height:1000px;
+           
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            v-bind:class="{active:true}"
+            v-bind:class="可以是一个对象"
+            对象结构是 key:boolean
+            key的值是用来决定对象是否生效的，true为生效，false不生效
+         -->
+
+        <!-- <div v-on:click="isActive=!isActive"  v-bind:class="['box',{active:isActive}]" >
+            呵呵
+        </div> -->
+
+        <!-- 
+            v-bind:style="{
+                cssStylekey:value
+            }"
+            实际上就是在HTML上添加内联样式，只不过使用数据来驱动
+         -->
+
+         <div v-bind:style="{backgroundColor:color}">
+             123
+         </div>
+         {{color}}
+         <input type="color" v-model="color">
+         {{range}}
+         <input type="range" v-model="range">
+         <div class="box2" v-bind:style="{backgroundColor:'rgba(0,0,0,'+range/100+')'}"> </div>
+    </div>
+    <script>
+        const vm=new  Vue({
+             el:"#app",
+             data:{
+                 className:"active",
+                 isActive:false,
+                 color:"",
+                 range:0
+             }
+        })
+    </script>
+</body>
+</html>

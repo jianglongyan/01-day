@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .auto{
+            width: 200px;
+            height: 35px;
+            border: 1px solid #000;
+            position: relative;
+        }
+        .auto input{
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            padding: 0 5px;
+            box-sizing: border-box;
+        }
+        .auto ul{
+            position: absolute;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            border: 1px solid #000;
+            border-bottom: none;
+
+        }
+        .auto  ul li{
+            border-bottom: 1px solid #000;
+            line-height: 35px;
+        }
+        .auto  ul li.active{
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="auto">
+            <input type="text" v-model="email" @input="input" @keydown.38.40.13.prevent="active">
+            <ul>
+                <li v-for="(e,index) in emaillist"
+                :class="{active:index===selectindex}"
+                 @click="select(e)">
+                    {{e}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                email:"",
+                emaillist:[],
+                selectindex:-1
+            },
+            methods:{ 
+ 
+                input(){
+                    if(/[\@]{1,}/g.test(this.email)){
+                       return;
+                    }
+                    if(this.email===""){
+                        this.emaillist=[];
+                        return;
+                    }
+                  this.emaillist=[
+                     this.email+ "@qq.com",
+                     this.email+  "@163.com",
+                     this.email+  "@email.com"
+                  ]
+                },
+                active(e){
+                    e=e ||event 
+                    const keyCode =event.keyCode;
+
+                    switch(keyCode) {
+                        case 13:
+                          this.select(this.emaillist[this.selectindex])
+                        break;
+                         case 37:
+                        break;
+                        case 38:
+                        // e.preventDefault()
+                          this .selectindex--;
+                          if(this.selectindex<0){
+                            this.selectindex=this.emaillist.length-1
+                          }
+                        break;
+                        case 39:
+                        break;
+
+                        case 40:
+                           this.selectindex++;
+                           if(this.selectindex>this.emaillist.length-1){
+                               this.selectindex=0
+                           }
+                        break;
+                    }
+
+                },
+                select(e){
+                    this.email=e;
+                    this.emaillist=[];
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

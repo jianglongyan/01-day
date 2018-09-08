@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+    <!--  {{user.username}}
+     
+     {{user.age}}
+     {{user.sex}} -->
+    <!-- <br/>
+    <br/>
+     男<input type="radio"  @click="select" value="男" v-model="sex">
+     女<input type="radio"  @click="select" value="女" v-mod el="sex">-->
+
+    <!--  <button @click="select">切换</button> -->
+
+
+
+    <ul>
+        <li v-for="user in users">{{user}}</li>
+    </ul>
+    <button @click="concat">合并</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                sex:"男",
+                user:{
+                    username:"张三",
+                    age:20
+                   
+                },
+                users:[
+                    "张三",
+                    "李四"
+                ]
+            },
+            methods:{
+                select(){
+                    // Vue.set(this.user,"sex","男")
+                   this.$set(this.user,"sex","男")
+                   
+                },
+                concat(){
+                //    this.users= this.users.concat("老王")
+                    //   this.users.pop()
+                this.users.push("老王")
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

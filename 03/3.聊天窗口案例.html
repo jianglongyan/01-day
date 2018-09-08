@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+        .chat{
+            width: 500px;
+            height: 400px;
+            border: 1px solid #000;
+            position: relative;
+        }
+        .chat .show{
+            height: 300px;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        .chat .show ul{
+            
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+        }
+        .chat .show li{
+            height: 30px;
+        }
+        .chat .show li .content{
+            background:orangered;
+            padding: 0 10px;
+            border-radius: 10px;
+            color: aliceblue;
+        }
+        .chat .show li.mine{
+            text-align: right;
+        }
+        .chat .input{
+            height: 100px;
+            width: 100%;
+            resize: none;
+            padding: 5px;
+            box-sizing: border-box;
+            outline:none;
+
+        }
+        .chat button{
+            position: absolute;
+            bottom:10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="chat">
+            <div class="show">
+                <ul>
+                    <li :class="item.target" v-for="(item,index) in chatlist">
+                        {{item.username}}
+                       <span class="content">
+                           {{item.content}}
+                       </span>
+                    </li>
+                </ul>
+            </div>
+            <textarea class="input" v-model="input" @keydown.enter.prevent="send"></textarea>
+             <button @click="send" >发送</button>
+        </div>
+    </div>
+    <script>
+          const vm=new Vue({
+              el:"#app",
+              data:{
+                  input:"",
+                  chatlist:[
+                      {
+                          username:"小张",
+                          target:"other",
+                          content:"你好"
+                          
+                      },
+                      {
+                          username:"小姜",
+                          target:"mine",
+                          content:"你好"
+                      }
+                  ]
+              },
+              methods:{
+                  
+                  send(){
+
+                      if(this.input){
+                        this.chatlist.push({
+                            username:"小姜",
+                          target:"mine",
+                          content:this.input
+                          })
+                      }
+                      this.input=""
+
+                      setTimeout(()=>{
+                        this.chatlist.push({
+                             username:"小张",
+                             target:"other",
+                             content:"不想和你聊"
+                        })
+                      },2000) 
+                    }
+              }
+          })
+    </script>
+</body>
+</html>

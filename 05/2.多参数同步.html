@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="js/vue.js"></script>
+    <script>
+        //局部组件 就是一个对象，相当于component里的第二个参数
+         const Card={
+             props:{
+                fontColor:String
+             }
+        }
+
+    </script>
+    <script src="component/2.input.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+       
+        new Vue({
+            el:"#app",
+            data:{
+               
+                value1:"变量1",
+                value2:"变量2"
+            },
+            template:`
+            <div class="app">
+                <h4>父实例里的变量value1:{{value1}} value2:{{value2}}</h4>
+               <Input2 :value1.sync="value1" :value2.sync="value2" />
+               <br/>
+               <br/>
+               <br/>
+
+               <br/>
+               <br/>
+               <input v-model="value1" />
+               <input v-model="value2" />
+            </div>
+               
+            `
+        })
+    </script>
+</body>
+</html>

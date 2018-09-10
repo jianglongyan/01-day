@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="js/vue.js"></script>
+    <script src="component/2.input.js"></script>
+    <style>
+        .card{
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            border-radius: 10px;
+        }
+        .card header{
+            height: 50px;
+            border-bottom: 1px solid #000;
+            display:flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        //<slot/>插槽
+        //<slot name="header" /><slot name="main" />具名插槽
+       const Card={
+           template:`
+           <div class="card">
+            <header>
+                <slot name="header" :data="title"/>{{title}}</slot>
+            </header>
+            <main>
+                <slot name="main" />
+            </main>
+           </div>
+           `,
+           data(){
+               return{
+                   title:"我的标题"
+               }
+           },
+       }
+        new Vue({
+            el:"#app",
+            template:`
+            <div class="app">
+                <Card>
+                    <div slot="header" slot-scope="{data}">{{data}}</div>
+                    <div slot="main">内容</div>
+                </Card>
+            </div>
+               
+            `,
+            data:{
+                iTitle:"标题栏"
+            },
+            components:{
+                Card
+            }
+        })
+    </script>
+</body>
+</html>

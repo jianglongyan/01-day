@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        const Cpt1={
+            template:`
+            <div>组件1
+                <input v-model="input" />
+            </div>
+            `,
+            data(){
+                return{
+                    input:""
+                }
+            }
+        }
+        const Cpt2={
+            template:`
+            <div>组件2
+                <input v-model="input" />
+            </div>
+            `,
+            data(){
+                return{
+                    input:""
+                }
+            }
+        }
+        const Cpt3={
+            template:`
+            <div>组件3
+                <input v-model="input" />
+            </div>
+            `,
+            data(){
+                return{
+                    input:""
+                }
+            }
+        }
+
+        new Vue({
+            //<keep-alive>用来缓存已失效组件
+            el:"#app",
+            template:`
+            <div class="app">
+                <keep-alive>
+                <component :is="value" />
+                </keep-alive>
+                <button @click="value='Cpt1'">Cpt1</button>
+                <button @click="value='Cpt2'">Cpt2</button>
+                <button @click="value='Cpt3'">Cpt3</button>
+            </div>
+            `,
+            data:{
+                value:"Cpt1"
+            },
+            components:{
+                Cpt1,
+                Cpt2,
+                Cpt3
+            }
+        })
+    </script>
+</body>
+</html>

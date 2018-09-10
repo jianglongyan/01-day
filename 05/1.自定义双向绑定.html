@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="js/vue.js"></script>
+    <script>
+        //局部组件 就是一个对象，相当于component里的第二个参数
+         const Card={
+             props:{
+                fontColor:String
+             },
+            template:`
+            <div>Card component
+                {{fontColor}}
+            </div>
+            `
+        }
+
+    </script>
+    <script src="component/icon.js"></script>
+    <script src="component/button.js"></script>
+    <script src="component/input.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+       
+        new Vue({
+            el:"#app",
+            data:{
+                color:"red",
+                value:"父实例参数"
+            },
+            template:`
+            <div>
+                {{value}}
+               <Input :value="value" @input="input"/>
+               <br/>
+               <br/>
+               <br/>
+               <textarea v-model="value"></textarea>
+            </div>
+               
+            `,
+            components:{ //components选项用于添加局部组件
+                Card //card在这里注册，只属于这里
+            },
+            methods:{
+                click(color){
+                    this.color=color
+                    console.log("点击事件触发了");
+                },
+                input(n){
+                    this.value=n
+                }
+            }
+        })
+    </script>
+</body>
+</html>
